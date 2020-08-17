@@ -10,9 +10,10 @@ export const radioPlayerInit = () => {
     const audio = new Audio(); //функция создает объект конструктора аудио
     audio.type = 'audio/aac';
 
-    radioStop.disabled = true;
+     radioStop.disabled = true; //остановлено
 
     const changeIconPlay = () => {
+        // меняем кнопку в зависимости от того играет песня или нет
         if(audio.paused){
             radio.classList.remove('play');
             radioStop.classList.add('fa-play');
@@ -35,19 +36,21 @@ export const radioPlayerInit = () => {
         const parent = target.closest('.radio-item');
         selectItem(parent);
 
+        // получили название радиостанции и передали
         const title = parent.querySelector('.radio-name').textContent;
         radioHeaderBig.textContent = title;
-
+        // получили изображение и передали
         const urlImg = parent.querySelector('.radio-img').src;
         radioCoverImg.src = urlImg;
 
-        radioStop.disabled = false;
-        audio.src = target.dataset.radioStantion;
+        radioStop.disabled = false;  // запустили радио
+         audio.src = target.dataset.radioStantion; //передали ссылку на станцию
         audio.play();
-        changeIconPlay();
+        changeIconPlay();  //поменяли кнопку
     });
 
     radioStop.addEventListener('click', () => {
+        // остановка когда надо
         if(audio.paused) {
             audio.play();
         }
